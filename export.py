@@ -1,5 +1,4 @@
 import csv, sys
-import os
 
 exportFile = "morado2-export.csv"
 
@@ -10,15 +9,16 @@ with open(exportFile, 'w') as f_write:
         reader = csv.reader(f_read)
         try:
             for row in reader:
-                url_foto = row[25]
-                url_foto_png = url_foto.replace(".jpg" , ".png")
+                nombre_foto = row[25].split("/")[-1]
+                nombre_foto_png = nombre_foto.replace(".jpg" , ".png")
                 try:
-                    url_foto_final = url_foto_png.split('?v=')[0]
+                    nombre_foto_final = nombre_foto_png.split('?v=')[0]
                 except:
-                    url_foto_final = url_foto_png
+                    nombre_foto_final = nombre_foto_png
 
-                row[25] = url_foto_final
-                url = row[25]
+                row[25] = nombre_foto_final
+                url_ref = "https://cdn.shopify.com/s/files/1/0626/0847/4335/products/"
+                url = url_ref + row[25]
                 handle = row[0]
                 title = row[1]
 
